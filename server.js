@@ -1,38 +1,33 @@
-// server.js
-// where your node app starts
-
 // init project
-var express = require('express');
-var app = express();
+const express = require("express");
+const app = express();
 
-const bodyParser = require('body-parser');
-const rp = require('request-promise');
+const bodyParser = require("body-parser");
+const rp = require("request-promise");
 const { ROOM_URL, ROOM_TOKEN } = process.env;
-
 
 app.use(bodyParser.json());
 
-function convertSentryLevelToLozAppearance(level){
-  switch(level){
-    case 'error':           
-    case 'fatal':
-      return 'removed'; //red
-    case 'warning':      
-      return 'moved' //yellow
-    case 'info':      
-      return 'inprogress' //blue
-    case 'debug':      
+function convertSentryLevelToLozAppearance(level) {
+  switch (level) {
+    case "error":
+    case "fatal":
+      return "removed"; //red
+    case "warning":
+      return "moved"; //yellow
+    case "info":
+      return "inprogress"; //blue
+    case "debug":
     default:
-      return 'default' //grey
+      return "default"; //grey
   }
 }
 
-app.post("/forwardToStride", function (req, res) {
+app.post("/forwardToStride", function(req, res) {
   //console.log(JSON.stringify(req.body, null, 2))
-  res.sendStatus(204).end()
-  
-  const strideTemplate = 
-        `{
+  res.sendStatus(204).end();
+
+  const strideTemplate = `{
   "content": [
     {
       "attrs": {
@@ -50,7 +45,9 @@ app.post("/forwardToStride", function (req, res) {
         "details": [
           {
             "lozenge": {
-              "appearance": "${convertSentryLevelToLozAppearance(req.body.level)}",
+              "appearance": "${convertSentryLevelToLozAppearance(
+                req.body.level
+              )}",
               "text": "${req.body.level}"
             },
             "title":"Level"
@@ -73,7 +70,9 @@ app.post("/forwardToStride", function (req, res) {
         "link": {
           "url": "${req.body.url}"
         },
-        "text": "Sentry Event - ${req.body.project} - ${req.body.level.toUpperCase()} - \\"${req.body.message}\\"",
+        "text": "Sentry Event - ${
+          req.body.project
+        } - ${req.body.level.toUpperCase()} - \\"${req.body.message}\\"",
         "title": {
           "text": "${req.body.project} - ${req.body.level.toUpperCase()}",
           "user": {
@@ -90,27 +89,27 @@ app.post("/forwardToStride", function (req, res) {
   "type": "doc",
   "version": 1
 }`;
-  
-  let strideMessage = JSON.parse( strideTemplate)
+
+  let strideMessage = JSON.parse(strideTemplate);
   let options = {
-    method: 'POST',
-    uri:ROOM_URL,
-    headers:{
-      Authorization:`Bearer ${ROOM_TOKEN}`
+    method: "POST",
+    uri: ROOM_URL,
+    headers: {
+      Authorization: `Bearer ${ROOM_TOKEN}`
     },
-    body:strideMessage,
-    json:true
+    body: strideMessage,
+    json: true
   };
   rp(options)
-    .then(b =>{
-      console.log('post successful')
-    }).catch(err =>{
-      console.error(err);
+    .then(b => {
+      console.log("post successful");
     })
-  
+    .catch(err => {
+      console.error(err);
+    });
 });
 
 // listen for requests :)
-var listener = app.listen(process.env.PORT, function () {
-  console.log('Your app is listening on port ' + listener.address().port);
+let listener = app.listen(process.env.PORT, function() {
+  console.log("Your app is listening on port " + listener.address().port);
 });
