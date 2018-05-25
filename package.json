@@ -1,0 +1,30 @@
+{
+  "name": "sentry-webhook-to-stride-room",
+  "version": "0.1.0",
+  "description": "simple microservice to send a sentry webhook call to a stride room using Stride's Room Token feature",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "request": "^2.87.0",
+    "request-promise": "^4.2.2"
+  },
+  "engines": {
+    "node": "8.x"
+  },
+  "repository": {
+    "url": "https://github.com/jrossAtlassian/sentry-webhook-to-stride-room"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch",
+    "express",
+    "stride",
+    "raven",
+    "sentry"
+  ]
+}
