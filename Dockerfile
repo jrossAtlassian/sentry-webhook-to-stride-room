@@ -10,9 +10,4 @@ COPY package-lock.json /usr/src/app/
 RUN npm install && npm cache clean --force
 COPY . /usr/src/app
 
-ARG ROOM_URL
-ENV ROOM_URL $ROOM_URL
-ARG ROOM_TOKEN
-ENV ROOM_TOKEN $ROOM_TOKEN
-
 CMD [ "npm", "start" ]
