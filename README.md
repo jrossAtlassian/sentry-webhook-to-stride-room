@@ -10,8 +10,8 @@ This is a simple service that transforms messages from a sentry webhook to a roo
 
 Pre-requisites
 
-* Have Docker installed
-* Have ngrok installed 
+* Have [Docker](https://docs.docker.com/install/) installed
+* Have [ngrok](https://ngrok.com/download) installed 
 
 Steps
 1. Copy .env_example to .env
@@ -30,8 +30,8 @@ You should see a post on the docker container, then you should see a post to you
 
 Pre-requisites
 
-* Have Node 8+ installed
-* Have ngrok installed 
+* Have [Node 8+](https://nodejs.org/en/download/) installed
+* Have [ngrok](https://ngrok.com/download) installed 
 
 Steps
 1. Install npm packages with `npm i`
