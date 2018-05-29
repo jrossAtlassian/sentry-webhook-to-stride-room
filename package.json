@@ -1,6 +1,6 @@
 {
   "name": "sentry-webhook-to-stride-room",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Simple microservice to send a sentry webhook call to a stride room using Stride's Room Token feature",
   "main": "server.js",
   "scripts": {
@@ -10,7 +10,8 @@
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
     "request": "^2.87.0",
-    "request-promise": "^4.2.2"
+    "request-promise": "^4.2.2",
+    "express-ipfilter": "^0.3.1"
   },
   "engines": {
     "node": "8.x"
